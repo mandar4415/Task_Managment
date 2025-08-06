@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Heading, Button, Input, VStack, Text } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
+import API_URL from '../config';
 
 const Signup = () => {
   const [name, setName] = useState('');
@@ -13,7 +14,7 @@ const Signup = () => {
     e.preventDefault();
     setError(null);
     try {
-      const res = await fetch('/api/auth/signup', {
+      const res = await fetch(`${API_URL}/api/auth/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, password })

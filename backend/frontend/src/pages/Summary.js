@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import DashboardLayout from '../components/DashboardLayout';
 import { Heading, Text, Box, Progress, VStack } from '@chakra-ui/react';
+import API_URL from '../config';
 
 const Summary = () => {
   const [summary, setSummary] = useState(null);
@@ -9,7 +10,7 @@ const Summary = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    fetch('/api/summary/daily', {
+    fetch(`${API_URL}/api/summary/daily`, {
       headers: {
         'Authorization': token ? `Bearer ${token}` : '',
       },

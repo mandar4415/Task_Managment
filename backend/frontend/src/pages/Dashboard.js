@@ -8,6 +8,7 @@ import TaskForm from '../components/TaskForm';
 import TaskList from '../components/TaskList';
 import TimeTracker from '../components/TimeTracker';
 import DailySummary from '../components/DailySummary';
+import API_URL from '../config';
 
 const Dashboard = () => {
   // Placeholder for tasks state and add handler (API integration later)
@@ -28,7 +29,7 @@ const Dashboard = () => {
       navigate('/login');
       return;
     }
-    fetch('/api/tasks', {
+    fetch(`${API_URL}/api/tasks`, {
       headers: {
         'Authorization': token ? `Bearer ${token}` : '',
       },
@@ -59,7 +60,7 @@ const Dashboard = () => {
   const handleAddTask = async (task) => {
     const token = localStorage.getItem('token');
     try {
-      const res = await fetch('/api/tasks', {
+      const res = await fetch(`${API_URL}/api/tasks`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -99,7 +100,7 @@ const Dashboard = () => {
               onComplete={async (task) => {
                 const token = localStorage.getItem('token');
                 try {
-                  const res = await fetch(`/api/tasks/${task._id || task.id}`, {
+                  const res = await fetch(`${API_URL}/api/tasks/${task._id || task.id}`, {
                     method: 'PUT',
                     headers: {
                       'Content-Type': 'application/json',
@@ -120,7 +121,7 @@ const Dashboard = () => {
               onSave={async ({ title, description }) => {
                 const token = localStorage.getItem('token');
                 try {
-                  const res = await fetch(`/api/tasks/${editingTask._id || editingTask.id}`, {
+                  const res = await fetch(`${API_URL}/api/tasks/${editingTask._id || editingTask.id}`, {
                     method: 'PUT',
                     headers: {
                       'Content-Type': 'application/json',
@@ -148,7 +149,7 @@ const Dashboard = () => {
                   <Button colorScheme="red" mr={3} onClick={async () => {
                     const token = localStorage.getItem('token');
                     try {
-                      const res = await fetch(`/api/tasks/${deletingTask._id || deletingTask.id}`, {
+                      const res = await fetch(`${API_URL}/api/tasks/${deletingTask._id || deletingTask.id}`, {
                         method: 'DELETE',
                         headers: {
                           'Authorization': token ? `Bearer ${token}` : '',

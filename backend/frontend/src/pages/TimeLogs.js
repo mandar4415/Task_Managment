@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import DashboardLayout from '../components/DashboardLayout';
 import { Heading, Text, Box, VStack, Input, Button, Divider } from '@chakra-ui/react';
+import API_URL from '../config';
 
 
 const TimeLogs = () => {
@@ -14,7 +15,7 @@ const TimeLogs = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    fetch('/api/timelogs', {
+    fetch(`${API_URL}/api/timelogs`, {
       headers: {
         'Authorization': token ? `Bearer ${token}` : '',
       },
