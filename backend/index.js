@@ -3,9 +3,17 @@ const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
 
+
 const app = express();
 app.use(express.json());
-app.use(cors());
+// Explicitly allow local and deployed frontend origins for CORS
+app.use(cors({
+  origin: [
+    'http://localhost:3000', // Local development
+    'https://task-managment-omega-red.vercel.app' // Deployed Vercel frontend
+  ],
+  credentials: true
+}));
 
 connectDB();
 app.use('/api/auth', require('./routes/auth'));
